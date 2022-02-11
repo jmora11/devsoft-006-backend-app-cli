@@ -1,46 +1,36 @@
 const { program } = require('commander');
-const { prompt } = require('inquirer');
-const { addTask, listTask } = require('./controllers/TaskController');
+const { answers } = require('./controllers/TaksPrompt');
 
-program.version('1.0.0')
+const { addTask, listTask, removeTask, updateTask, findByWord } = require('./controllers/TaskController');
+
+program
+    .version('1.0.0')
     .description('A command line tool for managing tasks');
 
-program.command('save')
-    .action(async () => {
+program
+    .command('save')
+    .alias('s')
+    .action(async () => await addTask(await answers()));
 
-        const answers = await prompt([
-            {
-                type: 'input',
-                message: 'Task Title',
-                name: 'title'
-            },
-            {
-                type: 'input',
-                message: 'Task Description',
-                name: 'description'
-            },
-            {
-                type: 'rawlist',
-                message: 'Day to resolve this task',
-                name: 'dayToResolve',
-                choices: [
-                    'Monday',
-                    'Tuesday',
-                    'Wednesday',
-                    'Thursday',
-                    'Friday',
-                    'Saturday',
-                    'Sunday'
-                ]
-            }
-        ]);
-
-        addTask(answers);
-    });
-
-program.command('list')
+program
+    .command('list')
+    .alias('l')
     .action(async () => await listTask());
 
+program
+    .command('delete <id>')
+    .alias('d')
+    .action(async (id) => await removeTask(id));
 
+program
+    .command('update <id>')
+    .alias('u')
+    .action(async (id) => await updateTask(id, await answers()));
 
-program.parse(program.argv);
+program
+    .command('find <word>')
+    .alias('f')
+    .action(async (word) => await findByWord(word));
+
+program
+    .parse(program.argv);

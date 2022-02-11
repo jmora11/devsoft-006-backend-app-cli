@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "taskcli": "./src/index.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jmora11/devsoft-006-backend-app-cli.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Julián Mora",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jmora11/devsoft-006-backend-app-cli/issues"
