@@ -1,4 +1,4 @@
-#!/usr/bin/env-node
+// #!/usr/bin/env-node does'nt works
 require('./command');
 const { connectBD } = require('./db');
 
